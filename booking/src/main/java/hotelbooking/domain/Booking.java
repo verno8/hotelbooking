@@ -64,7 +64,7 @@ public class Booking {
         // 비동기 호출: 호텔 예약 확인
         checkHotelAvailabilityAsync();
     }
-    
+
     @Async
     public CompletableFuture<Void> checkHotelAvailabilityAsync() {
         try {
@@ -110,5 +110,23 @@ public class Booking {
 
     public static void setHotelService(HotelService hotelService) {
         Booking.hotelService = hotelService;
+    }
+
+    // bookId의 Getter/Setter
+    public Integer getBookId() {
+        return bookId;
+    }
+
+    public void setBookId(Integer bookId) {
+        this.bookId = bookId;
+    }
+
+    // status의 Getter/Setter
+    public String getStatus() {
+        return bookStatus;
+    }
+
+    public void setStatus(String status) {
+        this.bookStatus = status;
     }
 }
