@@ -30,3 +30,44 @@
 
 
 ## 3. 클라우드 네이티브 개발
+1) Saga
+
+kafka설치 후 호출 및 모니터링 할 수 있다.
+![image](https://github.com/user-attachments/assets/a93908c8-0cfe-4802-ada6-ea71a8e6523f)
+
+![image](https://github.com/user-attachments/assets/6a1e3d6c-222c-4c53-87d7-5d446ebe387e)
+
+![image](https://github.com/user-attachments/assets/e811b682-0073-49b1-9d2c-3ff72bf73202)
+
+![image](https://github.com/user-attachments/assets/a53b22c1-6fa5-4f2b-ae69-322aa6de127b)
+
+
+
+booking(예약요청) -> point(포인트차감) 은 동기식,
+포인트 차감 후 hotel(예약확정) 요청 및 booking(상태변경)은 비동기식이다.
+
+따라서, hotel 서비스가 중지되어있어도 booking은 정상 작동한다.
+
+![image](https://github.com/user-attachments/assets/86b23a91-41fe-4e16-9363-7fd500e979a4)
+
+![image](https://github.com/user-attachments/assets/c10f2264-f3d9-43e8-be7d-af6289497431)
+
+
+그리고 후에 hotel이 실행되면 kafka에 저장된 이벤트를 수행하고 결과를 전달한다.
+
+
+
+3) Compensation
+
+
+4) Gateway
+
+같은 IP, Port로 각 서비스를 접근한다.
+
+![image](https://github.com/user-attachments/assets/6619c5a8-d4cf-433a-a894-19a3dcd6f074)
+
+![image](https://github.com/user-attachments/assets/39f55a7f-a6f6-4d09-8800-b0ead3025cfb)
+
+
+
+6) CQRS
