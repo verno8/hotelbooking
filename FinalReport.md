@@ -1,6 +1,5 @@
 /*
-2024년 Cloud Native 교육 4차
-KTDS 재무DX개발팀 이재경
+2024년 Cloud Native 교육 4차 - KTDS 재무DX개발팀 이재경
 */
 
 # 예제 - 임직원 휴양소 예약 서비스
