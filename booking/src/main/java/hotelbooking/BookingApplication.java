@@ -1,6 +1,10 @@
 package hotelbooking;
 
 import hotelbooking.config.kafka.KafkaProcessor;
+import hotelbooking.external.PointService;
+import hotelbooking.domain.Booking;
+
+// import org.apache.karaf.examples.rest.api.Booking;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.cloud.openfeign.EnableFeignClients;
@@ -17,6 +21,7 @@ public class BookingApplication {
     public static void main(String[] args) {
         applicationContext =
             SpringApplication.run(BookingApplication.class, args);
+            Booking.setPointService(applicationContext.getBean(PointService.class));
     }
 
     //git test122333

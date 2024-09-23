@@ -13,11 +13,21 @@ import org.springframework.web.bind.annotation.RestController;
 //<<< Clean Arch / Inbound Adaptor
 
 @RestController
-// @RequestMapping(value="/points")
-@Transactional
+@RequestMapping(value="/points")
 public class PointController {
 
     @Autowired
     PointRepository pointRepository;
+
+    @PostMapping("/{userId}/decrease")
+    @Transactional
+    public void decreasePoint(@PathVariable Long userId, @RequestParam Float points) {
+        Optional<Point> pointOptional = pointRepository.findByUserId(userId);
+        if (pointOptional.isPresent()) {
+            Point point = pointOptional.get();
+            point.setUserpoint(point.getUserpoint() - points);
+            pointRepository.save(point);
+        }
+    }
 }
 //>>> Clean Arch / Inbound Adaptor

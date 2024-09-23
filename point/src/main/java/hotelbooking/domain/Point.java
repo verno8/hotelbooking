@@ -10,7 +10,7 @@ import javax.persistence.*;
 import lombok.Data;
 
 @Entity
-@Table(name = "Point_table")
+@Table(name = "point")
 @Data
 //<<< DDD / Aggregate Root
 public class Point {
