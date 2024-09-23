@@ -71,3 +71,20 @@ booking(예약요청) -> point(포인트차감) 은 동기식,
 
 
 6) CQRS
+
+예약을 요청하면 booking 테이블과 동시에 mypage에도 입력된다.(비동기)
+
+![image](https://github.com/user-attachments/assets/4d09801d-9be0-4633-8877-9df8ff3fb3c1)
+
+![image](https://github.com/user-attachments/assets/cd4e9e50-f3a8-4c24-acdf-33288adbd224)
+
+
+booking 서비스가 종료되어도 mypage는 조회 가능하다.
+
+![image](https://github.com/user-attachments/assets/9f6a4caa-41c0-4143-8b7f-555a123ef4be)
+
+
+
+
+## 4. 클라우드 네이티브 운영
+1) CI/CD - Azure
