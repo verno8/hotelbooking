@@ -10,7 +10,7 @@ import javax.persistence.*;
 import lombok.Data;
 
 @Entity
-@Table(name = "Booking_table")
+@Table(name = "booking")
 @Data
 //<<< DDD / Aggregate Root
 public class Booking {
@@ -18,17 +18,11 @@ public class Booking {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
-
     private Integer userId;
-
     private Integer bookId;
-
     private Integer hotelId;
-
     private String hotelName;
-
     private Date bookDt;
-
     private String bookStatus;
 
     @PostPersist
