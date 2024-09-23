@@ -30,7 +30,7 @@ public class BookingPolicyHandler {
             
             if (booking != null) {
                 // Hotel 서비스에서 온 메시지에 따라 bookStatus 업데이트
-                booking.setBookStatus(reservation.getStatus().equals("Y") ? "ㅛ" : "FAILED");
+                booking.setBookStatus(reservation.getStatus().equals("Y") ? "Y" : "N");
                 bookingRepository.save(booking);
                 
                 System.out.println("Booking status updated for BookId: " + reservation.getBookId());

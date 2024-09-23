@@ -8,7 +8,7 @@ import lombok.Data;
 
 //<<< EDA / CQRS
 @Entity
-@Table(name = "Mypage_table")
+@Table(name = "mypage")
 @Data
 public class Mypage {
 

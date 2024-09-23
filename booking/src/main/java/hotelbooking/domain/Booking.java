@@ -28,6 +28,7 @@ public class Booking {
     private String hotelName;
     private Date bookDt;
     private String bookStatus;
+    private String source;
 
     @Transient
     @Autowired
@@ -126,7 +127,8 @@ public class Booking {
         return bookStatus;
     }
 
-    public void setStatus(String status) {
-        this.bookStatus = status;
+    public void setStatus(String Status) {
+        this.bookStatus = Status;
     }
+
 }

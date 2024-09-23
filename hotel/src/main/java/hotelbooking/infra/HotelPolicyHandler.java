@@ -33,24 +33,25 @@ public class HotelPolicyHandler {
             ObjectMapper objectMapper = new ObjectMapper();
             Bookingapproved reservation = objectMapper.readValue(message, Bookingapproved.class);
 
+            // // 발신자 정보가 "hotel-service"인 경우 무시
+            // if ("hotel-service".equals(reservation.getSource())) {
+            //     System.out.println("LOG>> Ignoring self-sent message for bookId: " + reservation.getBookId());
+            //     return;
+            // }
+            
             // hotelId 및 reservationDate에 따른 방 예약 가능 여부 확인
             Hotel hotel = hotelRepository.findByHotelIdAndRoomDt(reservation.getHotelId(), reservation.getRoomDt());
 
             if (hotel != null) {
-                System.out.println("LOG>> Hotel found: " + hotel.getHotelId() + ", Room Date: " + hotel.getRoomDt() + ", Available Rooms: " + hotel.getRoomQty());
                 if (hotel.getRoomQty() > 0) {
                     hotel.setRoomQty(hotel.getRoomQty() - 1); // 객실 1개 감소
                     hotelRepository.save(hotel);
-                    System.out.println("LOG>> Room quantity updated. New quantity: " + hotel.getRoomQty());
-
-                    sendSuccessResponse(reservation.getBookId()); // bookId 전달
+                    // sendSuccessResponse(reservation.getBookId()); // bookId 전달
                 } else {
-                    System.out.println("LOG>> No rooms available");
-                    sendFailureResponse(reservation.getBookId()); // bookId 전달
+                    // sendFailureResponse(reservation.getBookId()); // bookId 전달
                 }
             } else {
-                System.out.println("LOG>> Hotel not found with given criteria");
-                sendFailureResponse(reservation.getBookId());
+                // sendFailureResponse(reservation.getBookId());
             }
 
         } catch (Exception e) {
@@ -61,30 +62,26 @@ public class HotelPolicyHandler {
     private void sendSuccessResponse(Integer bookId) {
         try {
             // 성공 응답 메시지 생성
-            
-            System.out.println("LOG>> sendSuccessResponse 1");
-
             Bookingapproved approvedMessage = new Bookingapproved();
             approvedMessage.setBookId(bookId);
             approvedMessage.setStatus("Y"); // 예약 성공
-
-            System.out.println("LOG>> sendSuccessResponse 2");
+            approvedMessage.setSource("hotel-service"); // 발신자 정보 추가
+    
             // Kafka로 메시지 전송
             output.send(MessageBuilder.withPayload(approvedMessage).build());
-            
-            System.out.println("LOG>> sendSuccessResponse 3");
         } catch (Exception e) {
             e.printStackTrace();
         }
     }
-
+    
     private void sendFailureResponse(Integer bookId) {
         try {
             // 실패 응답 메시지 생성
             Bookingapproved failedMessage = new Bookingapproved();
             failedMessage.setBookId(bookId);
             failedMessage.setStatus("N"); // 예약 실패
-
+            failedMessage.setSource("hotel-service"); // 발신자 정보 추가
+    
             // Kafka로 메시지 전송
             output.send(MessageBuilder.withPayload(failedMessage).build());
         } catch (Exception e) {
