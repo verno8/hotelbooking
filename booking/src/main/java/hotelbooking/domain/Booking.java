@@ -7,11 +7,13 @@ import java.util.Date;
 import javax.persistence.*;
 import lombok.Data;
 import hotelbooking.external.PointService;
+import hotelbooking.external.HotelService;
+import hotelbooking.external.Bookingapproved;
+import lombok.*;
 
 @Entity
 @Table(name = "booking")
 @Data
-//<<< DDD / Aggregate Root
 public class Booking {
 
     @Id
@@ -27,40 +29,47 @@ public class Booking {
     @Transient
     private static PointService pointService;
 
+    @Transient
+    private static HotelService hotelService; // HotelService 추가
+
     @PostPersist
     public void onPostPersist() {
-        // Following code causes dependency to external APIs
-        // It is NOT A GOOD PRACTICE. Instead, Event-Policy mapping is recommended.
-
-        // 포인트 1점 차감 - FeignClient를 통한 동기 호출
-        if (pointService != null) {
-            pointService.decreasePoint(this.userId, 1.0f);
-        } else {
-            System.out.println("PointService is not initialized.");
-        }
+        // Point 차감 로직 (동기 호출)
+        hotelbooking.external.Point point = new hotelbooking.external.Point();
+        BookingApplication.applicationContext.getBean(hotelbooking.external.PointService.class)
+            .decreasePoint(userId, 1.0f);
 
         // 예약 이벤트 발행
         Booked booked = new Booked(this);
         booked.publishAfterCommit();
 
-        // 예약 취소 이벤트 발행 (예약 시에 취소 이벤트를 발행하는 것은 의도된 로직인지 확인 필요)
-        // 일반적으로 예약 시에는 '취소' 이벤트를 발행하지 않기 때문에 아래 코드는 제거할 수 있습니다.
-        // Canceled canceled = new Canceled(this);
-        // canceled.publishAfterCommit();
+        // Hotel 서비스에 예약 요청 (비동기 호출)
+        Bookingapproved reservation = new Bookingapproved();
+        reservation.setBookId(bookId); // bookId를 사용하도록 수정
+        reservation.setHotelId(hotelId);
+        reservation.setHotelName(hotelName);
+        reservation.setRoomDt(bookDt);
+        reservation.setRoomQty(1);  // 예약하려는 방 수량 설정
+        hotelService.checkAvailability(reservation);
     }
 
     public static BookingRepository repository() {
-        return BookingApplication.applicationContext.getBean(BookingRepository.class);
+        BookingRepository bookingRepository = BookingApplication.applicationContext.getBean(
+            BookingRepository.class
+        );
+        return bookingRepository;
     }
 
     public void book() {
-        // Implement business logic here
+        // implement business logic here:
+
         Booked booked = new Booked(this);
         booked.publishAfterCommit();
     }
 
     public void cancel() {
-        // Implement business logic here
+        // implement business logic here:
+
         Canceled canceled = new Canceled(this);
         canceled.publishAfterCommit();
     }
@@ -68,5 +77,8 @@ public class Booking {
     public static void setPointService(PointService pointService) {
         Booking.pointService = pointService;
     }
+
+    public static void setHotelService(HotelService hotelService) {
+        Booking.hotelService = hotelService;
+    }
 }
-//>>> DDD / Aggregate Root
