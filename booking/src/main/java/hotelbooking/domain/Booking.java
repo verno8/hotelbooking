@@ -34,7 +34,7 @@ public class Booking {
 
         // 포인트 1점 차감 - FeignClient를 통한 동기 호출
         if (pointService != null) {
-            pointService.decreasePoint(this.userId.longValue(), 1.0f);
+            pointService.decreasePoint(this.userId, 1.0f);
         } else {
             System.out.println("PointService is not initialized.");
         }

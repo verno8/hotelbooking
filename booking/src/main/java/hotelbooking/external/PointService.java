@@ -13,5 +13,5 @@ import org.springframework.web.bind.annotation.*;
 public interface PointService {
 
     @RequestMapping(method = RequestMethod.POST, value = "/points/{userId}/decrease", consumes = "application/json")
-    void decreasePoint(@PathVariable("userId") Long userId, @RequestParam("points") Float points);
+    void decreasePoint(@PathVariable("userId") Integer userId, @RequestParam("points") Float points);
 }

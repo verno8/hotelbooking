@@ -1,19 +1,16 @@
+// package: hotelbooking.infra
 package hotelbooking.infra;
 
-import hotelbooking.domain.*;
-import java.util.Optional;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import javax.transaction.Transactional;
+import hotelbooking.domain.Point;
+import hotelbooking.domain.PointRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
 
-//<<< Clean Arch / Inbound Adaptor
+import javax.transaction.Transactional;
+import java.util.Optional;
 
 @RestController
-@RequestMapping(value="/points")
+@RequestMapping("/points")
 public class PointController {
 
     @Autowired
@@ -21,13 +18,18 @@ public class PointController {
 
     @PostMapping("/{userId}/decrease")
     @Transactional
-    public void decreasePoint(@PathVariable Long userId, @RequestParam Float points) {
+    public void decreasePoint(@PathVariable Integer userId, @RequestParam Float points) {
         Optional<Point> pointOptional = pointRepository.findByUserId(userId);
         if (pointOptional.isPresent()) {
             Point point = pointOptional.get();
-            point.setUserpoint(point.getUserpoint() - points);
-            pointRepository.save(point);
+            if (point.getUserpoint() >= points) {
+                point.setUserpoint(point.getUserpoint() - points);
+                pointRepository.save(point);
+            } else {
+                throw new IllegalStateException("Not enough points for user ID: " + userId);
+            }
+        } else {
+            throw new IllegalStateException("User ID " + userId + " not found in the point table.");
         }
     }
 }
-//>>> Clean Arch / Inbound Adaptor

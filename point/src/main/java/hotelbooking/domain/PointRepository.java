@@ -15,6 +15,6 @@ package hotelbooking.domain;
 import org.springframework.data.repository.CrudRepository;
 import java.util.Optional;
 
-public interface PointRepository extends CrudRepository<Point, Long> {
-    Optional<Point> findByUserId(Long userId);
+public interface PointRepository extends CrudRepository<Point, Integer> {
+    Optional<Point> findByUserId(Integer userId);
 }
