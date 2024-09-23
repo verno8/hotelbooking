@@ -13,7 +13,10 @@ package hotelbooking.domain;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
+import org.springframework.data.repository.PagingAndSortingRepository;
 
 @Repository
 public interface BookingRepository extends JpaRepository<Booking, Long> {
+    Booking findByBookId(Integer bookId);
 }
+
