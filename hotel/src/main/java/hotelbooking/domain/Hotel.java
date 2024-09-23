@@ -25,7 +25,7 @@ public class Hotel {
 
     private Date roomDt;
 
-    private String roomStatus;
+    private Integer roomQty;
 
     @PostPersist
     public void onPostPersist() {

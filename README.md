@@ -43,7 +43,7 @@ mvn spring-boot:run
 ```
 - hotel
 ```
- http :8088/hotels id="id" hotelId="hotelId" hotelName="hotelName" roomDt="roomDt" roomStatus="roomStatus" 
+ http :8088/hotels id="id" hotelId="hotelId" hotelName="hotelName" roomDt="roomDt" roomQty="roomQty" 
 ```
 - dashboard
 ```

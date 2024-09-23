@@ -15,7 +15,7 @@
                 <Date label="RoomDt" v-model="item.roomDt" :editMode="editMode" @change="change" />
             </div>
             <div>
-                <String label="RoomStatus" v-model="item.roomStatus" :editMode="editMode" @change="change" />
+                <Integer label="RoomQty" v-model="item.roomQty" :editMode="editMode" @change="change" />
             </div>
         </v-card-text>
 

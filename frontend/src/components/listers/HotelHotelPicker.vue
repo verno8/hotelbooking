@@ -24,7 +24,7 @@
                                 RoomDt :  {{item.roomDt }}
                             </v-list-item-subtitle>
                             <v-list-item-subtitle>
-                                RoomStatus :  {{item.roomStatus }}
+                                RoomQty :  {{item.roomQty }}
                             </v-list-item-subtitle>
                         </v-list-item-content>
 

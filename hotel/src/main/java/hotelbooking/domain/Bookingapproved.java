@@ -15,7 +15,7 @@ public class Bookingapproved extends AbstractEvent {
     private Integer hotelId;
     private String hotelName;
     private Date roomDt;
-    private String roomStatus;
+    private Integer roomQty;
 
     public Bookingapproved(Hotel aggregate) {
         super(aggregate);

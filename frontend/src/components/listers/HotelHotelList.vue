@@ -52,7 +52,7 @@
                             [ HotelId :  {{data.hotelId }} ] &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                             [ HotelName :  {{data.hotelName }} ] &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                             [ RoomDt :  {{data.roomDt }} ] &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                            [ RoomStatus :  {{data.roomStatus }} ] &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                            [ RoomQty :  {{data.roomQty }} ] &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                         </v-list-item-subtitle>
 
                     </v-list-item-content>
@@ -123,7 +123,7 @@
                 'hotelId': 0,
                 'hotelName': '',
                 'roomDt': '2024-09-23',
-                'roomStatus': '',
+                'roomQty': 0,
             }
         },
         methods: {

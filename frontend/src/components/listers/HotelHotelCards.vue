@@ -112,7 +112,7 @@
                 'hotelId': 0,
                 'hotelName': '',
                 'roomDt': '2024-09-23',
-                'roomStatus': '',
+                'roomQty': 0,
             }
         },
         methods:{

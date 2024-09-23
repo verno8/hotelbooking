@@ -19,7 +19,7 @@
             <Number label="HotelId" v-model="value.hotelId" :editMode="editMode" :inputUI="''"/>
             <String label="HotelName" v-model="value.hotelName" :editMode="editMode" :inputUI="''"/>
             <Date label="RoomDt" v-model="value.roomDt" :editMode="editMode" :inputUI="''"/>
-            <String label="RoomStatus" v-model="value.roomStatus" :editMode="editMode" :inputUI="''"/>
+            <Integer label="RoomQty" v-model="value.roomQty" :editMode="editMode" :inputUI="''"/>
         </v-card-text>
 
         <v-card-actions>

@@ -70,7 +70,7 @@
                     { text: "hotelId", value: "hotelId" },
                     { text: "hotelName", value: "hotelName" },
                     { text: "roomDt", value: "roomDt" },
-                    { text: "roomStatus", value: "roomStatus" },
+                    { text: "roomQty", value: "roomQty" },
                 ],
             hotel : [],
             newValue: {},
@@ -91,7 +91,7 @@
                 'hotelId': 0,
                 'hotelName': '',
                 'roomDt': '2024-09-23',
-                'roomStatus': '',
+                'roomQty': 0,
             }
         },
         methods: {
