@@ -22,3 +22,9 @@
 
    
 * 이벤트 스토밍
+![image](https://github.com/user-attachments/assets/6cbede3f-50ff-4d0b-b6db-66122b3d5934)
+
+
+
+
+# 3. 클라우드 네이티브 개발
