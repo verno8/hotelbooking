@@ -13,7 +13,7 @@ import lombok.Data;
 public class Mypage {
 
     @Id
-    //@GeneratedValue(strategy=GenerationType.AUTO)
+    @GeneratedValue(strategy=GenerationType.AUTO)
     private Long id;
 
     private Integer userId;
@@ -21,6 +21,6 @@ public class Mypage {
     private Integer hotelId;
     private String hotelName;
     private Date bookDt;
-    private String bookStaus;
+    private String bookStatus;
     private Float userpoint;
 }

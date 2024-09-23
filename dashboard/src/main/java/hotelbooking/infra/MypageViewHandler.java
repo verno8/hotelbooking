@@ -30,7 +30,7 @@ public class MypageViewHandler {
             mypage.setHotelId(booked.getHotelId());
             mypage.setHotelName(booked.getHotelName());
             mypage.setBookDt(booked.getBookDt());
-            mypage.setBookStaus(booked.getBookStatus());
+            mypage.setBookStatus(booked.getBookStatus());
             // view 레파지 토리에 save
             mypageRepository.save(mypage);
         } catch (Exception e) {
