@@ -84,6 +84,12 @@ booking 서비스가 종료되어도 mypage는 조회 가능하다.
 ![image](https://github.com/user-attachments/assets/9f6a4caa-41c0-4143-8b7f-555a123ef4be)
 
 
+이벤트 발생시 생성/갱신되는 소스 구현은 아래와 같다.
+
+![image](https://github.com/user-attachments/assets/5506ce5e-3517-4650-95d9-ac1c2c3efa95)
+
+![image](https://github.com/user-attachments/assets/d6d82e57-c38e-4348-93fc-24cd10636d01)
+
 
 
 ## 4. 클라우드 네이티브 운영
