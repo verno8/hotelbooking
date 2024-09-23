@@ -37,9 +37,9 @@ public class MypageViewHandler {
             e.printStackTrace();
         }
     }
-
+//
     @StreamListener(KafkaProcessor.INPUT)
-    public void whenPointdecreased_then_UPDATE_1(
+    public void whenPointdecreased_then_UPDATE_1( 
         @Payload Pointdecreased pointdecreased
     ) {
         try {
