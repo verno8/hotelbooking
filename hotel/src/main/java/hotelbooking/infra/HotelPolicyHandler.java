@@ -27,7 +27,7 @@ public class HotelPolicyHandler {
     @Qualifier("event-out") // 정확한 Bean을 지정
     private MessageChannel output; // 메시지 전송을 위한 채널
 
-    @StreamListener(KafkaProcessor.INPUT)
+    @StreamListener(KafkaProcessor.INPUT) // Kafka에서 들어오는 메시지를 처리하는 리스너
     public void wheneverBooked_CheckAvailability(@Payload String message) {
         try {
             ObjectMapper objectMapper = new ObjectMapper();
@@ -35,13 +35,22 @@ public class HotelPolicyHandler {
 
             // hotelId 및 reservationDate에 따른 방 예약 가능 여부 확인
             Hotel hotel = hotelRepository.findByHotelIdAndRoomDt(reservation.getHotelId(), reservation.getRoomDt());
-            if (hotel != null && hotel.getRoomQty() > 0) {
-                hotel.setRoomQty(hotel.getRoomQty() - reservation.getRoomQty());
-                hotelRepository.save(hotel);
 
-                sendSuccessResponse(reservation.getBookId()); // bookId 전달
+            if (hotel != null) {
+                System.out.println("LOG>> Hotel found: " + hotel.getHotelId() + ", Room Date: " + hotel.getRoomDt() + ", Available Rooms: " + hotel.getRoomQty());
+                if (hotel.getRoomQty() > 0) {
+                    hotel.setRoomQty(hotel.getRoomQty() - 1); // 객실 1개 감소
+                    hotelRepository.save(hotel);
+                    System.out.println("LOG>> Room quantity updated. New quantity: " + hotel.getRoomQty());
+
+                    sendSuccessResponse(reservation.getBookId()); // bookId 전달
+                } else {
+                    System.out.println("LOG>> No rooms available");
+                    sendFailureResponse(reservation.getBookId()); // bookId 전달
+                }
             } else {
-                sendFailureResponse(reservation.getBookId()); // bookId 전달
+                System.out.println("LOG>> Hotel not found with given criteria");
+                sendFailureResponse(reservation.getBookId());
             }
 
         } catch (Exception e) {

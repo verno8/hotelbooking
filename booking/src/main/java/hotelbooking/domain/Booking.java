@@ -9,6 +9,9 @@ import lombok.Data;
 import hotelbooking.external.PointService;
 import hotelbooking.external.HotelService;
 import hotelbooking.external.Bookingapproved;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.scheduling.annotation.Async;
+import java.util.concurrent.CompletableFuture;
 import lombok.*;
 
 @Entity
@@ -27,30 +30,57 @@ public class Booking {
     private String bookStatus;
 
     @Transient
+    @Autowired
     private static PointService pointService;
 
     @Transient
+    @Autowired
     private static HotelService hotelService; // HotelService 추가
 
     @PostPersist
     public void onPostPersist() {
-        // Point 차감 로직 (동기 호출)
-        hotelbooking.external.Point point = new hotelbooking.external.Point();
-        BookingApplication.applicationContext.getBean(hotelbooking.external.PointService.class)
-            .decreasePoint(userId, 1.0f);
+        // // Point 차감 로직 (동기 호출)
+        // hotelbooking.external.Point point = new hotelbooking.external.Point();
+        // BookingApplication.applicationContext.getBean(hotelbooking.external.PointService.class)
+        //     .decreasePoint(userId, 1.0f);
+
+
+        // // Hotel 서비스에 예약 요청 (비동기 호출)
+        // Bookingapproved reservation = new Bookingapproved();
+        // reservation.setBookId(bookId); // bookId를 사용하도록 수정
+        // reservation.setHotelId(hotelId);
+        // reservation.setHotelName(hotelName);
+        // reservation.setRoomDt(bookDt);
+        // reservation.setRoomQty(1);  // 예약하려는 방 수량 설정
+        // hotelService.checkAvailability(reservation);
+
+        // 동기 호출: 포인트 차감
+        pointService.decreasePoint(userId, 1.0f);
 
         // 예약 이벤트 발행
         Booked booked = new Booked(this);
         booked.publishAfterCommit();
 
-        // Hotel 서비스에 예약 요청 (비동기 호출)
-        Bookingapproved reservation = new Bookingapproved();
-        reservation.setBookId(bookId); // bookId를 사용하도록 수정
-        reservation.setHotelId(hotelId);
-        reservation.setHotelName(hotelName);
-        reservation.setRoomDt(bookDt);
-        reservation.setRoomQty(1);  // 예약하려는 방 수량 설정
-        hotelService.checkAvailability(reservation);
+        // 비동기 호출: 호텔 예약 확인
+        checkHotelAvailabilityAsync();
+    }
+    
+    @Async
+    public CompletableFuture<Void> checkHotelAvailabilityAsync() {
+        try {
+            Bookingapproved reservation = new Bookingapproved();
+            reservation.setBookId(bookId);
+            reservation.setHotelId(hotelId);
+            reservation.setHotelName(hotelName);
+            reservation.setRoomDt(bookDt);
+            reservation.setRoomQty(1);
+
+            hotelService.checkAvailability(reservation);
+            System.out.println("Hotel availability checked successfully.");
+        } catch (Exception ex) {
+            ex.printStackTrace(); // 예외 로그 처리
+        }
+        return CompletableFuture.completedFuture(null);
     }
 
     public static BookingRepository repository() {

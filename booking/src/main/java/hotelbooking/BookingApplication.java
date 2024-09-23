@@ -8,10 +8,12 @@ import org.springframework.cloud.stream.annotation.EnableBinding;
 import org.springframework.context.ApplicationContext;
 import hotelbooking.domain.Booking;
 import hotelbooking.external.HotelService;
+import org.springframework.scheduling.annotation.EnableAsync;
 
 @SpringBootApplication
 @EnableBinding(KafkaProcessor.class)
 @EnableFeignClients
+@EnableAsync
 public class BookingApplication {
 
     public static ApplicationContext applicationContext;
