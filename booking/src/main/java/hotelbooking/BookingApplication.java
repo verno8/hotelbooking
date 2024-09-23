@@ -22,5 +22,7 @@ public class BookingApplication {
         applicationContext = SpringApplication.run(BookingApplication.class, args);
         Booking.setPointService(applicationContext.getBean(hotelbooking.external.PointService.class));
         Booking.setHotelService(applicationContext.getBean(HotelService.class)); // HotelService 연결
+
+        System.out.println("LOG>> booking main");
     }
 }

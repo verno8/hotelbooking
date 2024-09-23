@@ -61,12 +61,18 @@ public class HotelPolicyHandler {
     private void sendSuccessResponse(Integer bookId) {
         try {
             // 성공 응답 메시지 생성
+            
+            System.out.println("LOG>> sendSuccessResponse 1");
+
             Bookingapproved approvedMessage = new Bookingapproved();
             approvedMessage.setBookId(bookId);
             approvedMessage.setStatus("Y"); // 예약 성공
 
+            System.out.println("LOG>> sendSuccessResponse 2");
             // Kafka로 메시지 전송
             output.send(MessageBuilder.withPayload(approvedMessage).build());
+            
+            System.out.println("LOG>> sendSuccessResponse 3");
         } catch (Exception e) {
             e.printStackTrace();
         }
