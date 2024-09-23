@@ -2,6 +2,8 @@ package hotelbooking.infra;
 
 import hotelbooking.domain.Booking;
 import hotelbooking.domain.BookingRepository;
+import java.util.List;  // 수정된 부분
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -24,5 +26,12 @@ public class BookingController {
 
         // 저장된 예약 정보 반환
         return ResponseEntity.ok(savedBooking);
+    }
+
+    // 모든 Booking 데이터 가져오기
+    @GetMapping
+    public ResponseEntity<List<Booking>> getAllBookings() {
+        List<Booking> bookings = bookingRepository.findAll();  // java.util.List를 사용
+        return ResponseEntity.ok(bookings);
     }
 }
