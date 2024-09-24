@@ -98,11 +98,13 @@
 
 
 ## 4. 클라우드 네이티브 운영
-1) CI/CD - Azure
+1) CI/CD - Azure DevOps
+   
   AKS를 생성한다.
+  
   ![image](https://github.com/user-attachments/assets/5ca208d3-697c-4a21-a07b-3eda51043081)
 
-  Azure DevOps를 사용한다.
+  
 
 * CI 세팅
 
