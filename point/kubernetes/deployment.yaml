@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
         - name: point
-          image: user21.azurecr.io/point:20240924002
+          image: verno8/point:1.2
           ports:
             - containerPort: 8080
           readinessProbe:

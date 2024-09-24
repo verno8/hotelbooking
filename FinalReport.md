@@ -125,7 +125,7 @@
 
   CD가 정상 실행됐는지 POD 상태로 확인한다.
 
-  ![image](https://github.com/user-attachments/assets/95d13d35-a7f5-41ef-8c8b-c1636c9f0e1e)
+  ![image](https://github.com/user-attachments/assets/c793fdce-3f6c-4c36-baf2-13b4bf475a3c)
 
 
 
