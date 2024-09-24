@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
         - name: booking
-          image: "user21.azurecr.io/booking:20240924003"
+          image: "user21.azurecr.io/booking:20240924002"
           ports:
             - containerPort: 8080
           readinessProbe:
