@@ -186,3 +186,26 @@ mysql 접속 비밀번호를 직접 지정이 아닌 secret에 담아 사용한�
 ![image](https://github.com/user-attachments/assets/4fe2913f-4a84-4dff-b678-da313d577b5d)
 
 
+
+6) Mesh(Istio)
+
+Istio를 통해 서비스간의 통신, 라우팅 등을 설정하고 관리할 수 있다.
+
+트레이싱 서비스를 통해 대시보드 형태로 시각화할 수 있다.
+
+![image](https://github.com/user-attachments/assets/aaab88c0-1b42-43a6-84e8-8325c95661dc)
+
+
+
+7) 모니터링
+
+외부 url 접속을 위해 LoadBalancer로 변경한다.
+
+![image](https://github.com/user-attachments/assets/24ce5e9e-f433-4d80-9846-1169fc95c0bb)
+
+
+Grafana에 prometheus를 연결해서 데이터를 확인한다.
+
+![image](https://github.com/user-attachments/assets/ab037901-61a8-4d73-a822-afd99aa75356)
+
+
