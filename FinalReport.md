@@ -130,3 +130,10 @@
 
 
    
+2) HPA
+
+booking 서비스에 hpa 설정한다.
+
+![image](https://github.com/user-attachments/assets/f9923afe-a8d8-4e63-93a9-783daf8b482b)
+
+-> CPU 사용률 50% 기준으로 최소 1개에서 최대 3개까지 자동으로 스케일링

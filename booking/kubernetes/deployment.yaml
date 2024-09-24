@@ -16,14 +16,14 @@ spec:
     spec:
       containers:
         - name: booking
-          image: "verno8/booking:1.2"
+          image: "user21.azurecr.io/booking:20240924006"
           ports:
             - containerPort: 8080
           readinessProbe:
             httpGet:
               path: '/actuator/health'
               port: 8080
-            initialDelaySeconds: 10
+            initialDelaySeconds: 15
             timeoutSeconds: 2
             periodSeconds: 5
             failureThreshold: 10

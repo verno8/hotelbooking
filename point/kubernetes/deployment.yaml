@@ -16,14 +16,14 @@ spec:
     spec:
       containers:
         - name: point
-          image: verno8/point:1.2
+          image: "user21.azurecr.io/point:20240924005"
           ports:
             - containerPort: 8080
           readinessProbe:
             httpGet:
               path: '/actuator/health'
               port: 8080
-            initialDelaySeconds: 10
+            initialDelaySeconds: 15
             timeoutSeconds: 2
             periodSeconds: 5
             failureThreshold: 10

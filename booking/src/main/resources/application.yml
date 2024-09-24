@@ -9,11 +9,12 @@ spring:
 spring:
   profiles: default
   datasource:
-    url: jdbc:mysql://localhost:3306/hotelbooking
-    username: admin
-    password: admin1234
+    url: jdbc:mysql://my-mysql:3306/hotelbooking
+    username: root
+    password: my-root-password
     driver-class-name: com.mysql.cj.jdbc.Driver
   jpa:
+    database-platform: org.hibernate.dialect.MySQL5InnoDBDialect
     properties:
       hibernate:
         show_sql: true
@@ -67,11 +68,12 @@ server:
 spring:
   profiles: docker
   datasource:
-    url: jdbc:mysql://localhost:3306/hotelbooking
-    username: admin
-    password: admin1234
+    url: jdbc:mysql://my-mysql:3306/hotelbooking
+    username: root
+    password: my-root-password
     driver-class-name: com.mysql.cj.jdbc.Driver
   jpa:
+    database-platform: org.hibernate.dialect.MySQL5InnoDBDialect
     properties:
       hibernate:
         show_sql: true
@@ -84,7 +86,7 @@ spring:
     stream:
       kafka:
         binder:
-          brokers: my-kafka:9092
+          brokers: 172.212.17.7:9092
         streams:
           binder:
             configuration:
