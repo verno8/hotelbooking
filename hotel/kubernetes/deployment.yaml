@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
         - name: hotel
-          image: "username/hotel:latest"
+          image: "user21.azurecr.io/hotel:20240924002"
           ports:
             - containerPort: 8080
           readinessProbe:
