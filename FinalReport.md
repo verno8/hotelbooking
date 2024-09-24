@@ -137,3 +137,52 @@ booking 서비스에 hpa 설정한다.
 ![image](https://github.com/user-attachments/assets/f9923afe-a8d8-4e63-93a9-783daf8b482b)
 
 -> CPU 사용률 50% 기준으로 최소 1개에서 최대 3개까지 자동으로 스케일링
+
+
+
+3) Secret
+
+mysql 접속 비밀번호를 직접 지정이 아닌 secret에 담아 사용한다.
+
+![image](https://github.com/user-attachments/assets/07f0ca35-4a6b-4e04-93b4-b65aeb6fdd67)
+
+
+코드 적용
+
+![image](https://github.com/user-attachments/assets/fd352794-e86c-4dd0-88e1-3794a25db3bc)
+
+![image](https://github.com/user-attachments/assets/5e70e057-eeff-4b53-aa56-d0707514ecfc)
+
+
+
+4) PVC
+
+
+공간을 할당해서 DB 데이터를 저장하면 종료된 이후에도 데이터가 보존된다.
+
+![image](https://github.com/user-attachments/assets/0d5245a3-48bd-40a4-976f-5457643ba905)
+
+
+현재 user21의 aks에 설치된 mysql은 pv와 pvc가 이미 할당되어있다.
+
+그래서 pod를 계속 재시작해도 데이터가 그대로 남아있다.
+
+![image](https://github.com/user-attachments/assets/7f8e718f-666a-489d-ab4f-ac47649bb7a7)
+
+![image](https://github.com/user-attachments/assets/94bdb305-6ae4-46a3-ac57-742857261793)
+
+
+
+
+5) Liveness
+
+현재 dashboard 서비스는 kafka 접속 실패로 pod가 정상 실행되지 않는다.
+
+![image](https://github.com/user-attachments/assets/7ebaac6b-95b8-4c8d-a422-fe76cfea8b04)
+
+
+셀프힐링(liveness)을 통해 계속 재시작하는 것을 확인할 수 있다.
+
+![image](https://github.com/user-attachments/assets/4fe2913f-4a84-4dff-b678-da313d577b5d)
+
+

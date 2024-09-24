@@ -16,14 +16,20 @@ spec:
     spec:
       containers:
         - name: dashboard
-          image: "user21.azurecr.io/dashboard:20240924002"
+          image: "user21.azurecr.io/dashboard:3"
           ports:
             - containerPort: 8080
+          env:
+            - name: SPRING_DATASOURCE_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: mysql-secret-z
+                  key: mysql-password
           readinessProbe:
             httpGet:
               path: '/actuator/health'
               port: 8080
-            initialDelaySeconds: 10
+            initialDelaySeconds: 15
             timeoutSeconds: 2
             periodSeconds: 5
             failureThreshold: 10
