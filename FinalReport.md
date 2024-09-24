@@ -24,7 +24,7 @@
 * 이벤트 스토밍
 
 
-![image](https://github.com/user-attachments/assets/6cbede3f-50ff-4d0b-b6db-66122b3d5934)
+  ![image](https://github.com/user-attachments/assets/6cbede3f-50ff-4d0b-b6db-66122b3d5934)
 
 
 
@@ -32,65 +32,99 @@
 ## 3. 클라우드 네이티브 개발
 1) Saga
 
-kafka설치 후 호출 및 모니터링 할 수 있다.
-![image](https://github.com/user-attachments/assets/a93908c8-0cfe-4802-ada6-ea71a8e6523f)
-
-![image](https://github.com/user-attachments/assets/6a1e3d6c-222c-4c53-87d7-5d446ebe387e)
-
-![image](https://github.com/user-attachments/assets/e811b682-0073-49b1-9d2c-3ff72bf73202)
-
-![image](https://github.com/user-attachments/assets/a53b22c1-6fa5-4f2b-ae69-322aa6de127b)
-
-
-
-booking(예약요청) -> point(포인트차감) 은 동기식,
-포인트 차감 후 hotel(예약확정) 요청 및 booking(상태변경)은 비동기식이다.
-
-따라서, hotel 서비스가 중지되어있어도 booking은 정상 작동한다.
-
-![image](https://github.com/user-attachments/assets/86b23a91-41fe-4e16-9363-7fd500e979a4)
-
-![image](https://github.com/user-attachments/assets/c10f2264-f3d9-43e8-be7d-af6289497431)
-
-
-그리고 후에 hotel이 실행되면 kafka에 저장된 이벤트를 수행하고 결과를 전달한다.
+  kafka설치 후 호출 및 모니터링 할 수 있다.
+  
+  ![image](https://github.com/user-attachments/assets/a93908c8-0cfe-4802-ada6-ea71a8e6523f)
+  
+  ![image](https://github.com/user-attachments/assets/6a1e3d6c-222c-4c53-87d7-5d446ebe387e)
+  
+  ![image](https://github.com/user-attachments/assets/e811b682-0073-49b1-9d2c-3ff72bf73202)
+  
+  ![image](https://github.com/user-attachments/assets/a53b22c1-6fa5-4f2b-ae69-322aa6de127b)
 
 
 
-3) Compensation
+  booking(예약요청) -> point(포인트차감) 은 동기식,
+  
+  포인트 차감 후 hotel(예약확정) 요청 및 booking(상태변경)은 비동기식이다.
 
 
-4) Gateway
+  따라서, hotel 서비스가 중지되어있어도 booking은 정상 작동한다.
 
-같은 IP, Port로 각 서비스를 접근한다.
+  ![image](https://github.com/user-attachments/assets/86b23a91-41fe-4e16-9363-7fd500e979a4)
 
-![image](https://github.com/user-attachments/assets/6619c5a8-d4cf-433a-a894-19a3dcd6f074)
-
-![image](https://github.com/user-attachments/assets/39f55a7f-a6f6-4d09-8800-b0ead3025cfb)
+  ![image](https://github.com/user-attachments/assets/c10f2264-f3d9-43e8-be7d-af6289497431)
 
 
-
-6) CQRS
-
-예약을 요청하면 booking 테이블과 동시에 mypage에도 입력된다.(비동기)
-
-![image](https://github.com/user-attachments/assets/4d09801d-9be0-4633-8877-9df8ff3fb3c1)
-
-![image](https://github.com/user-attachments/assets/cd4e9e50-f3a8-4c24-acdf-33288adbd224)
+  그리고 후에 hotel이 실행되면 kafka에 저장된 이벤트를 수행하고 결과를 전달한다.
 
 
-booking 서비스가 종료되어도 mypage는 조회 가능하다.
 
-![image](https://github.com/user-attachments/assets/9f6a4caa-41c0-4143-8b7f-555a123ef4be)
+2) Compensation
+
+   
 
 
-이벤트 발생시 생성/갱신되는 소스 구현은 아래와 같다.
+3) Gateway
 
-![image](https://github.com/user-attachments/assets/5506ce5e-3517-4650-95d9-ac1c2c3efa95)
+  같은 IP, Port로 각 서비스를 접근한다.
 
-![image](https://github.com/user-attachments/assets/d6d82e57-c38e-4348-93fc-24cd10636d01)
+  ![image](https://github.com/user-attachments/assets/6619c5a8-d4cf-433a-a894-19a3dcd6f074)
+
+  ![image](https://github.com/user-attachments/assets/39f55a7f-a6f6-4d09-8800-b0ead3025cfb)
+
+
+
+4) CQRS
+
+  예약을 요청하면 booking 테이블과 동시에 mypage에도 입력된다.(비동기)
+
+  ![image](https://github.com/user-attachments/assets/4d09801d-9be0-4633-8877-9df8ff3fb3c1)
+
+  ![image](https://github.com/user-attachments/assets/cd4e9e50-f3a8-4c24-acdf-33288adbd224)
+
+
+  booking 서비스가 종료되어도 mypage는 조회 가능하다.
+
+  ![image](https://github.com/user-attachments/assets/9f6a4caa-41c0-4143-8b7f-555a123ef4be)
+
+
+  이벤트 발생시 생성/갱신되는 소스 구현은 아래와 같다.
+
+  ![image](https://github.com/user-attachments/assets/5506ce5e-3517-4650-95d9-ac1c2c3efa95)
+
+  ![image](https://github.com/user-attachments/assets/d6d82e57-c38e-4348-93fc-24cd10636d01)
 
 
 
 ## 4. 클라우드 네이티브 운영
 1) CI/CD - Azure
+  AKS를 생성한다.
+  ![image](https://github.com/user-attachments/assets/5ca208d3-697c-4a21-a07b-3eda51043081)
+
+  Azure DevOps를 사용한다.
+
+* CI 세팅
+
+  ![image](https://github.com/user-attachments/assets/864a84c1-3d05-4954-a36e-9010fca8fae0)
+
+  ![image](https://github.com/user-attachments/assets/343f781d-b969-4a22-995c-fe874409e8d7)
+
+  CI가 정상 실행되면 ACR에서 확인할 수 있다.
+
+  ![image](https://github.com/user-attachments/assets/ae36e1eb-97c2-425d-86e7-2c5f5a11bbb0)
+
+
+* CD 세팅
+
+  ![image](https://github.com/user-attachments/assets/9eb2b129-f7d4-4b71-9853-6b6ecc86a196)
+  
+  ![image](https://github.com/user-attachments/assets/b95aadd4-1dd6-499b-9a1e-75e8ea8c9008)
+
+  CD가 정상 실행됐는지 POD 상태로 확인한다.
+
+  ![image](https://github.com/user-attachments/assets/95d13d35-a7f5-41ef-8c8b-c1636c9f0e1e)
+
+
+
+   
