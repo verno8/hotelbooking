@@ -7,6 +7,8 @@
 ## 1. 클라우드 네이티브 아키텍처
 * 클라우드 아키텍처 설계
 
+![image](https://github.com/user-attachments/assets/906f1ea0-5d7a-4c02-8aa5-90d724cde35c)
+
 
 
 
