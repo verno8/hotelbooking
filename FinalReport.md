@@ -26,7 +26,7 @@
 * 이벤트 스토밍
 
 
-  ![image](https://github.com/user-attachments/assets/6cbede3f-50ff-4d0b-b6db-66122b3d5934)
+  ![image](https://github.com/user-attachments/assets/1e1b9d29-ea77-4c00-a974-8f3f10581bb9)
 
 
 
@@ -137,80 +137,85 @@
    
 2) HPA
 
-booking 서비스에 hpa 설정한다.
-
-![image](https://github.com/user-attachments/assets/f9923afe-a8d8-4e63-93a9-783daf8b482b)
-
--> CPU 사용률 50% 기준으로 최소 1개에서 최대 3개까지 자동으로 스케일링
+  booking 서비스에 hpa 설정한다.
+  
+  ![image](https://github.com/user-attachments/assets/f9923afe-a8d8-4e63-93a9-783daf8b482b)
+  
+  -> CPU 사용률 50% 기준으로 최소 1개에서 최대 3개까지 자동으로 스케일링
 
 
 
 3) Secret
 
-mysql 접속 비밀번호를 직접 지정이 아닌 secret에 담아 사용한다.
-
-![image](https://github.com/user-attachments/assets/07f0ca35-4a6b-4e04-93b4-b65aeb6fdd67)
-
-
-코드 적용
-
-![image](https://github.com/user-attachments/assets/fd352794-e86c-4dd0-88e1-3794a25db3bc)
-
-![image](https://github.com/user-attachments/assets/5e70e057-eeff-4b53-aa56-d0707514ecfc)
+  mysql 접속 비밀번호를 직접 지정이 아닌 secret에 담아 사용한다.
+  
+  ![image](https://github.com/user-attachments/assets/07f0ca35-4a6b-4e04-93b4-b65aeb6fdd67)
+  
+  
+  코드 적용
+  
+  ![image](https://github.com/user-attachments/assets/fd352794-e86c-4dd0-88e1-3794a25db3bc)
+  
+  ![image](https://github.com/user-attachments/assets/5e70e057-eeff-4b53-aa56-d0707514ecfc)
 
 
 
 4) PVC
 
 
-공간을 할당해서 DB 데이터를 저장하면 종료된 이후에도 데이터가 보존된다.
-
-![image](https://github.com/user-attachments/assets/0d5245a3-48bd-40a4-976f-5457643ba905)
-
-
-현재 user21의 aks에 설치된 mysql은 pv와 pvc가 이미 할당되어있다.
-
-그래서 pod를 계속 재시작해도 데이터가 그대로 남아있다.
-
-![image](https://github.com/user-attachments/assets/7f8e718f-666a-489d-ab4f-ac47649bb7a7)
-
-![image](https://github.com/user-attachments/assets/94bdb305-6ae4-46a3-ac57-742857261793)
-
+  공간을 할당해서 DB 데이터를 저장하면 종료된 이후에도 데이터가 보존된다.
+  
+  ![image](https://github.com/user-attachments/assets/0d5245a3-48bd-40a4-976f-5457643ba905)
+  
+  
+  현재 user21의 aks에 설치된 mysql은 pv와 pvc가 이미 할당되어있다.
+  
+  그래서 pod를 계속 재시작해도 데이터가 그대로 남아있다.
+  
+  ![image](https://github.com/user-attachments/assets/7f8e718f-666a-489d-ab4f-ac47649bb7a7)
+  
+  ![image](https://github.com/user-attachments/assets/94bdb305-6ae4-46a3-ac57-742857261793)
+  
 
 
 
 5) Liveness
-
-현재 dashboard 서비스는 kafka 접속 실패로 pod가 정상 실행되지 않는다.
-
-![image](https://github.com/user-attachments/assets/7ebaac6b-95b8-4c8d-a422-fe76cfea8b04)
-
-
-셀프힐링(liveness)을 통해 계속 재시작하는 것을 확인할 수 있다.
-
-![image](https://github.com/user-attachments/assets/4fe2913f-4a84-4dff-b678-da313d577b5d)
-
+  
+  liveness probe는 deployment.yaml에 아래와 같이 정의한다.
+  
+  ![image](https://github.com/user-attachments/assets/bb8c4b88-1b12-4cfa-89cf-fb528ba3c304)
+  
+  
+  현재 dashboard 서비스는 kafka 접속 실패로 pod가 정상 실행되지 않는다.
+  
+  ![image](https://github.com/user-attachments/assets/7ebaac6b-95b8-4c8d-a422-fe76cfea8b04)
+  
+  
+  셀프힐링(liveness)을 통해 계속 재시작하는 것을 확인할 수 있다.
+  
+  ![image](https://github.com/user-attachments/assets/4fe2913f-4a84-4dff-b678-da313d577b5d)
+  
 
 
 6) Mesh(Istio)
 
-Istio를 통해 서비스간의 통신, 라우팅 등을 설정하고 관리할 수 있다.
-
-트레이싱 서비스를 통해 대시보드 형태로 시각화할 수 있다.
-
-![image](https://github.com/user-attachments/assets/aaab88c0-1b42-43a6-84e8-8325c95661dc)
+  Istio를 통해 서비스간의 통신, 라우팅 등을 설정하고 관리할 수 있다.
+  
+  트레이싱 서비스를 통해 대시보드 형태로 시각화할 수 있다.
+  
+  ![image](https://github.com/user-attachments/assets/aaab88c0-1b42-43a6-84e8-8325c95661dc)
 
 
 
 7) 모니터링
-
-외부 url 접속을 위해 LoadBalancer로 변경한다.
-
-![image](https://github.com/user-attachments/assets/24ce5e9e-f433-4d80-9846-1169fc95c0bb)
-
-
-Grafana에 prometheus를 연결해서 데이터를 확인한다.
-
-![image](https://github.com/user-attachments/assets/ab037901-61a8-4d73-a822-afd99aa75356)
-
+  
+  외부 url 접속을 위해 LoadBalancer로 변경한다.
+  
+  ![image](https://github.com/user-attachments/assets/24ce5e9e-f433-4d80-9846-1169fc95c0bb)
+  
+  
+  Grafana에 prometheus를 연결해서 데이터를 확인한다.
+  
+  ![image](https://github.com/user-attachments/assets/ab037901-61a8-4d73-a822-afd99aa75356)
+  
 
