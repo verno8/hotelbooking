@@ -200,6 +200,16 @@
 6) Mesh(Istio)
 
   Istio를 통해 서비스간의 통신, 라우팅 등을 설정하고 관리할 수 있다.
+
+  ![image](https://github.com/user-attachments/assets/9db50eb9-3a5b-43bf-956e-10c96bc25e6e)
+
+
+  서비스간 통신을 수집하기 위해 사이드카를 POD에 주입한다. 주입하면 pod 속성에 사이드카 컨테이너가 생긴다.
+
+  ![image](https://github.com/user-attachments/assets/77ff3111-8bbe-4b04-8570-f41ae9699bb6)
+
+  ![image](https://github.com/user-attachments/assets/4e55ec09-9ed3-40f3-8c1d-9e8e825effea)
+  
   
   트레이싱 서비스를 통해 대시보드 형태로 시각화할 수 있다.
   
